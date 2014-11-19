@@ -1,0 +1,11 @@
+language: objective-c
+before_install:
+  - brew update
+install:
+  - mkdir -p $(brew --repo)/Library/Taps/travis
+  - ln -s $PWD $(brew --repo)/Library/Taps/travis/homebrew-testtap
+  - brew tap --repair
+script:
+  - brew audit iwyu
+  - brew install -v iwyu
+  - brew test iwyu
