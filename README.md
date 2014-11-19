@@ -1,6 +1,10 @@
 Homebrew IWYU
 =============
 
+[![Build Status](https://img.shields.io/travis/jasonmp85/homebrew-iwyu/master.svg)][status]
+[![Release](https://img.shields.io/github/release/jasonmp85/homebrew-iwyu.svg)][release]
+[![License](https://img.shields.io/:license-mit-blue.svg)][license]
+
 This formula makes it easy to install `include-what-you-use` on any modern OS X system.
 
 Just `brew tap jasonmp85/iwyu` and then `brew install iwyu`. Be patient: `include-what-you-use` depends on LLVM, which will take a while to build.
@@ -29,4 +33,7 @@ Copyright (c) 2014 Jason Petersen
 
 Code released under the [MIT License](LICENSE).
 
+[status]: https://travis-ci.org/jasonmp85/homebrew-iwyu
+[release]: https://github.com/jasonmp85/homebrew-iwyu/releases/latest
+[license]: LICENSE
 [iwyu-page]: http://include-what-you-use.com
