@@ -1,9 +1,9 @@
 Homebrew IWYU
 =============
 
-[![Build Status](http://img.shields.io/travis/jasonmp85/homebrew-iwyu/master.svg)][status]
-[![Release](http://img.shields.io/coveralls/citusdata/cstore_fdw/master.svg)][release]
-[![License](http://img.shields.io/:license-mit-blue.svg)][license]
+[![Build Status](https://img.shields.io/travis/jasonmp85/homebrew-iwyu/master.svg)][status]
+[![Release](https://img.shields.io/github/release/jasonmp85/homebrew-iwyu.svg)][release]
+[![License](https://img.shields.io/:license-mit-blue.svg)][license]
 
 This formula makes it easy to install `include-what-you-use` on any modern OS X system.
 
