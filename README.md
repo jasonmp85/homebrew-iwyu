@@ -7,7 +7,7 @@ Homebrew IWYU
 
 This formula makes it easy to install `include-what-you-use` on any modern OS X system.
 
-Just `brew tap jasonmp85/iwyu` and then `brew install iwyu`. Be patient: `include-what-you-use` depends on LLVM, which will take a while to build.
+Just `brew tap jasonmp85/iwyu` and then `brew install iwyu`.
 
 Using `iwyu`
 ------------
