@@ -1,6 +1,18 @@
 require 'English'
 require 'formula'
 
+# include-what-you-use needs access to headers included with LLVM 3.5, which
+# is only present in Xcode version 6.0 or higher.
+class Xcode6 < Requirement
+  fatal true
+
+  satisfy { MacOS::Xcode.version >= '6.0' }
+
+  def message
+    'Xcode 6.0 or newer is required for this package.'
+  end
+end
+
 # This formula provides an easy way to install include-what-you-use, a tool for
 # automatically managing include directives within C and C++ projects. It will
 # build and install include-what-you-use, symlink it as iwyu, and install a
@@ -9,26 +21,23 @@ class Iwyu < Formula
   CLANG_VERSION = '3.5'
 
   homepage 'https://code.google.com/p/include-what-you-use/'
-  url 'http://include-what-you-use.googlecode.com/svn/tags/clang_' +
-      "#{Iwyu::CLANG_VERSION}", revision: '590'
+  url 'http://include-what-you-use.com/downloads/' +
+    "include-what-you-use-#{Iwyu::CLANG_VERSION}-macosx-apple-darwin.tar.gz"
+  sha1 '7f38d22c3da1c9924179b522a9f4299373cddcd8'
   version '0.3'
 
-  depends_on 'cmake' => :build
-  depends_on 'llvm' => [:build, 'with-clang']
+  depends_on Xcode6
 
   def install
-    clang_path = "#{HOMEBREW_PREFIX}/Cellar/llvm/#{Iwyu::CLANG_VERSION}.0/"
+    clang_libs = "#{MacOS::Xcode.toolchain_path}/usr/lib/clang/6.0"
+    iwyu_clang_path = (lib / 'clang')
 
-    system 'cmake', "-DLLVM_PATH=#{clang_path}",
-           "-DCMAKE_CXX_FLAGS='-stdlib=libc++'",
-           "-DCMAKE_EXE_LINKER_FLAGS='-stdlib=libc++'",
-           "-DCMAKE_INSTALL_PREFIX=#{prefix}/",
-           buildpath, *std_cmake_args
-    system 'make', 'install'
+    iwyu_clang_path.mkpath
+    iwyu_clang_path.install_symlink(clang_libs => "#{Iwyu::CLANG_VERSION}.0")
 
     bin.install('fix_includes.py' => 'fix_include')
+    bin.install('include-what-you-use')
     bin.install_symlink('include-what-you-use' => 'iwyu')
-    prefix.install_symlink "#{clang_path}/lib"
   end
 
   test do
@@ -47,7 +56,7 @@ class Iwyu < Formula
     # pass the output to the fixer script and assert that it fixed one file
     results = pipe_output 'fix_include', fixes
 
-    assert_match /IWYU edited 1 file/, results
+    assert_match(/IWYU edited 1 file/, results)
 
     # sigh. they use the status code to signal how many files were edited
     assert_equal 1, $CHILD_STATUS.exitstatus
