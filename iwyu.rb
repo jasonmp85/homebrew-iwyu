@@ -20,9 +20,10 @@ end
 class Iwyu < Formula
   CLANG_VERSION = "3.6"
 
+  version "0.4"
   homepage "http://include-what-you-use.org"
   url "http://include-what-you-use.org/downloads/" \
-      "include-what-you-use-0.4-x86_64-apple-darwin.tar.gz"
+      "include-what-you-use-#{version}-x86_64-apple-darwin.tar.gz"
   sha1 "616cc2cd39d068896a94a40fb761e135e64db840"
 
   depends_on Xcode61
