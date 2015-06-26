@@ -18,13 +18,12 @@ end
 # build and install include-what-you-use, symlink it as iwyu, and install a
 # Python wrapper to automatically correct includes (fix_include).
 class Iwyu < Formula
-  CLANG_VERSION = "3.5" # technically a lie
+  CLANG_VERSION = "3.6"
 
-  homepage "https://code.google.com/p/include-what-you-use/"
-  url "http://include-what-you-use.com/downloads/" \
-    "include-what-you-use-#{Iwyu::CLANG_VERSION}-macosx-apple-darwin.tar.gz"
-  sha1 "7f38d22c3da1c9924179b522a9f4299373cddcd8"
-  version "0.3"
+  homepage "http://include-what-you-use.org"
+  url "http://include-what-you-use.org/downloads/" \
+      "include-what-you-use-0.4-x86_64-apple-darwin.tar.gz"
+  sha1 "616cc2cd39d068896a94a40fb761e135e64db840"
 
   depends_on Xcode61
 
@@ -50,8 +49,8 @@ class Iwyu < Formula
     { printf("hello world"); }
     EOS
 
-    # iwyu always exits with status 1 so assert that and capture output
-    fixes = shell_output "iwyu #{testpath}/demo.c 2>&1", 1
+    # iwyu exits with a code equal to the number of suggested edits + 2
+    fixes = shell_output "iwyu #{testpath}/demo.c 2>&1", 4
 
     # pass the output to the fixer script and assert that it fixed one file
     results = pipe_output "fix_include", fixes
