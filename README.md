@@ -29,7 +29,7 @@ Tell make to use it as the C compiler: `make -k CC=iwyu`. It's necessary to use 
 Copyright
 ---------
 
-Copyright (c) 2014 Jason Petersen
+Copyright © 2014–2015 Jason Petersen
 
 Code released under the [MIT License](LICENSE).
 
