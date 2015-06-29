@@ -1,15 +1,15 @@
 require "English"
 require "formula"
 
-# include-what-you-use needs access to headers included with LLVM 3.5, which
-# is only present in Xcode version 6.0 or higher.
-class Xcode6 < Requirement
+# include-what-you-use needs access to headers included with LLVM 3.6, which
+# is only present in Xcode version 6.1 or higher.
+class Xcode61 < Requirement
   fatal true
 
-  satisfy { MacOS::Xcode.version >= "6.0" }
+  satisfy { MacOS::Xcode.version >= "6.1" }
 
   def message
-    "Xcode 6.0 or newer is required for this package."
+    "Xcode 6.1 or newer is required for this package."
   end
 end
 
@@ -18,18 +18,18 @@ end
 # build and install include-what-you-use, symlink it as iwyu, and install a
 # Python wrapper to automatically correct includes (fix_include).
 class Iwyu < Formula
-  CLANG_VERSION = "3.5"
+  CLANG_VERSION = "3.6"
 
-  homepage "https://code.google.com/p/include-what-you-use/"
-  url "http://include-what-you-use.com/downloads/" \
-    "include-what-you-use-#{Iwyu::CLANG_VERSION}-macosx-apple-darwin.tar.gz"
-  sha1 "7f38d22c3da1c9924179b522a9f4299373cddcd8"
-  version "0.3"
+  version "0.4"
+  homepage "http://include-what-you-use.org"
+  url "http://include-what-you-use.org/downloads/" \
+      "include-what-you-use-#{version}-x86_64-apple-darwin.tar.gz"
+  sha1 "616cc2cd39d068896a94a40fb761e135e64db840"
 
-  depends_on Xcode6
+  depends_on Xcode61
 
   def install
-    clang_libs = "#{MacOS::Xcode.toolchain_path}/usr/lib/clang/6.0"
+    clang_libs = "#{MacOS::Xcode.toolchain_path}/usr/lib/clang/6.1.0"
     iwyu_clang_path = (lib / "clang")
 
     iwyu_clang_path.mkpath
@@ -50,8 +50,8 @@ class Iwyu < Formula
     { printf("hello world"); }
     EOS
 
-    # iwyu always exits with status 1 so assert that and capture output
-    fixes = shell_output "iwyu #{testpath}/demo.c 2>&1", 1
+    # iwyu exits with a code equal to the number of suggested edits + 2
+    fixes = shell_output "iwyu #{testpath}/demo.c 2>&1", 4
 
     # pass the output to the fixer script and assert that it fixed one file
     results = pipe_output "fix_include", fixes

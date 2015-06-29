@@ -36,4 +36,4 @@ Code released under the [MIT License](LICENSE).
 [status]: https://travis-ci.org/jasonmp85/homebrew-iwyu
 [release]: https://github.com/jasonmp85/homebrew-iwyu/releases/latest
 [license]: LICENSE
-[iwyu-page]: http://include-what-you-use.com
+[iwyu-page]: http://include-what-you-use.org
