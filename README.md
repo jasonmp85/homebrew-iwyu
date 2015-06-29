@@ -7,7 +7,7 @@ Homebrew IWYU
 
 This formula makes it easy to install `include-what-you-use` on any modern OS X system.
 
-Just `brew tap jasonmp85/iwyu` and then `brew install iwyu`. Be patient: `include-what-you-use` depends on LLVM, which will take a while to build.
+Just `brew tap jasonmp85/iwyu` and then `brew install iwyu`.
 
 Using `iwyu`
 ------------
@@ -29,11 +29,11 @@ Tell make to use it as the C compiler: `make -k CC=iwyu`. It's necessary to use 
 Copyright
 ---------
 
-Copyright (c) 2014 Jason Petersen
+Copyright © 2014–2015 Jason Petersen
 
 Code released under the [MIT License](LICENSE).
 
 [status]: https://travis-ci.org/jasonmp85/homebrew-iwyu
 [release]: https://github.com/jasonmp85/homebrew-iwyu/releases/latest
 [license]: LICENSE
-[iwyu-page]: http://include-what-you-use.com
+[iwyu-page]: http://include-what-you-use.org
