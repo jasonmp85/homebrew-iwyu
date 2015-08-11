@@ -35,6 +35,10 @@ class Iwyu < Formula
     iwyu_clang_path.mkpath
     iwyu_clang_path.install_symlink(clang_libs => "#{Iwyu::CLANG_VERSION}.0")
 
+    # Include C++ headers so iwyu can find them (via Clang's relative lookup)
+    cpp_includes = "#{MacOS::Xcode.toolchain_path}/usr/include/c++"
+    include.install_symlink(cpp_includes => "c++")
+
     bin.install("fix_includes.py" => "fix_include")
     bin.install("include-what-you-use")
     bin.install_symlink("include-what-you-use" => "iwyu")
