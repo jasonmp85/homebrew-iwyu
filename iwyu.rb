@@ -29,7 +29,9 @@ class Iwyu < Formula
   depends_on Xcode61
 
   def install
-    clang_libs = "#{MacOS::Xcode.toolchain_path}/usr/lib/clang/6.1.0"
+    xcode_maj_min_version = MacOS::Xcode.version[/\A\d+\.\d+/, 0]
+    clang_libs = "#{MacOS::Xcode.toolchain_path}/usr/lib/clang/" \
+                 "#{xcode_maj_min_version}.0"
     iwyu_clang_path = (lib / "clang")
 
     iwyu_clang_path.mkpath
