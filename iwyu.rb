@@ -24,7 +24,7 @@ class Iwyu < Formula
   homepage "http://include-what-you-use.org"
   url "http://include-what-you-use.org/downloads/" \
       "include-what-you-use-#{version}-x86_64-apple-darwin.tar.gz"
-  sha1 "616cc2cd39d068896a94a40fb761e135e64db840"
+  sha256 "41d7434545cb0c55acd9db0b1b66058ffbe88f3c3b79df4e3f649d54aabbbc7b"
 
   depends_on Xcode61
 
