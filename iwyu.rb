@@ -24,12 +24,14 @@ class Iwyu < Formula
   homepage "http://include-what-you-use.org"
   url "http://include-what-you-use.org/downloads/" \
       "include-what-you-use-#{version}-x86_64-apple-darwin.tar.gz"
-  sha1 "616cc2cd39d068896a94a40fb761e135e64db840"
+  sha256 "41d7434545cb0c55acd9db0b1b66058ffbe88f3c3b79df4e3f649d54aabbbc7b"
 
   depends_on Xcode61
 
   def install
-    clang_libs = "#{MacOS::Xcode.toolchain_path}/usr/lib/clang/6.1.0"
+    xcode_maj_min_version = MacOS::Xcode.version[/\A\d+\.\d+/, 0]
+    clang_libs = "#{MacOS::Xcode.toolchain_path}/usr/lib/clang/" \
+                 "#{xcode_maj_min_version}.0"
     iwyu_clang_path = (lib / "clang")
 
     iwyu_clang_path.mkpath
@@ -60,5 +62,11 @@ class Iwyu < Formula
 
     # sigh. they use the status code to signal how many files were edited
     assert_equal 1, $CHILD_STATUS.exitstatus
+  end
+
+  def caveats; <<-EOS.undent
+    This package will break after an Xcode upgrade. Fixing it is as simple as:
+      brew reinstall iwyu
+    EOS
   end
 end
