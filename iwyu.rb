@@ -38,7 +38,6 @@ class Iwyu < Formula
     iwyu_clang_path.mkpath
     iwyu_clang_path.install_symlink(clang_libs => "#{Iwyu::CLANG_VERSION}.0")
 
-    # Include C++ headers so iwyu can find them (via Clang's relative lookup)
     cpp_includes = "#{MacOS::Xcode.toolchain_path}/usr/include/c++"
     include.install_symlink(cpp_includes => "c++")
 
@@ -48,25 +47,30 @@ class Iwyu < Formula
   end
 
   test do
-    # write out a header and a C file relying on transitive dependencies
-    (testpath / "demo.h").write("#include <stdio.h>")
-    (testpath / "demo.c").write <<-EOS.undent
-    #include "demo.h"
+    # write out a header and a C++ file relying on transitive dependencies
+    (testpath / "demo.hpp").write <<-EOS.undent
+    #include <stdio.h>
+    #include <stdarg.h>
+    #include <locale>
+    EOS
+
+    (testpath / "demo.cpp").write <<-EOS.undent
+    #include "demo.hpp"
 
     int main(void)
     { printf("hello world"); }
     EOS
 
     # iwyu exits with a code equal to the number of suggested edits + 2
-    fixes = shell_output "iwyu #{testpath}/demo.c 2>&1", 4
+    fixes = shell_output "iwyu #{testpath}/demo.cpp 2>&1", 6
+    assert_not_match(/file not found/, fixes)
 
-    # pass the output to the fixer script and assert that it fixed one file
+    # pass the output to the fixer script and assert that it fixed two files
     results = pipe_output "fix_include", fixes
-
-    assert_match(/IWYU edited 1 file/, results)
+    assert_match(/IWYU edited 2 files/, results)
 
     # sigh. they use the status code to signal how many files were edited
-    assert_equal 1, $CHILD_STATUS.exitstatus
+    assert_equal 2, $CHILD_STATUS.exitstatus
   end
 
   def caveats; <<-EOS.undent
