@@ -63,4 +63,10 @@ class Iwyu < Formula
     # sigh. they use the status code to signal how many files were edited
     assert_equal 1, $CHILD_STATUS.exitstatus
   end
+
+  def caveats; <<-EOS.undent
+    This package will break after an Xcode upgrade. Fixing it is as simple as:
+      brew reinstall iwyu
+    EOS
+  end
 end
