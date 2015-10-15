@@ -1,3 +1,17 @@
+### homebrew-iwyu v2.1.0 (October 15, 2015) ###
+
+* Supports Xcode 6.1 or higher, including 7.0
+
+* Determines Xcode version at build time
+
+* Adds support for C++ builtin headers
+
+* No longer pollutes system include dirs
+
+* Builds against multiple Xcode versions in Travis
+
+* Adds stronger unit tests (fewer false positives)
+
 ### homebrew-iwyu v2.0.0 (June 28, 2015) ###
 
 * Installs include-what-you-use 0.4
