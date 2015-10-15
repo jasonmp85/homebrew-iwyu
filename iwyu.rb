@@ -39,9 +39,10 @@ class Iwyu < Formula
     iwyu_subdir_path = (prefix / "iwyu")
     iwyu_subdir_path.mkpath
 
-    xcode_maj_min_version = MacOS::Xcode.version[/\A\d+\.\d+/, 0]
-    clang_libs = "#{MacOS::Xcode.toolchain_path}/usr/lib/clang/" \
-                 "#{xcode_maj_min_version}.0"
+    clang_version = `clang --version`.each_line.first
+    apple_llvm_version = clang_version[/\AApple LLVM version (\d+(?:\.\d+)+)/, 1]
+
+    clang_libs = "#{MacOS::Xcode.toolchain_path}/usr/lib/clang/#{apple_llvm_version}"
     cpp_includes = "#{MacOS::Xcode.toolchain_path}/usr/include/c++"
 
     iwyu_bindir = (iwyu_subdir_path / "bin")
