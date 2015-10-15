@@ -30,20 +30,39 @@ class Iwyu < Formula
   depends_on Xcode61
 
   def install
+    # include-what-you-use needs lib and include directories one level
+    # up from its bindir, but putting them in the homebrew directories
+    # results in them getting linked in /usr (interfering with e.g. the
+    # /usr/local/include dirs added by gcc).
+    #
+    # To solve this, we put iwyu in a custom dir and make bin links.
+    iwyu_subdir_path = (prefix / "iwyu")
+    iwyu_subdir_path.mkpath
+
     xcode_maj_min_version = MacOS::Xcode.version[/\A\d+\.\d+/, 0]
     clang_libs = "#{MacOS::Xcode.toolchain_path}/usr/lib/clang/" \
                  "#{xcode_maj_min_version}.0"
-    iwyu_clang_path = (lib / "clang")
-
-    iwyu_clang_path.mkpath
-    iwyu_clang_path.install_symlink(clang_libs => "#{Iwyu::CLANG_VERSION}.0")
-
     cpp_includes = "#{MacOS::Xcode.toolchain_path}/usr/include/c++"
-    include.install_symlink(cpp_includes => "c++")
 
-    bin.install("fix_includes.py" => "fix_include")
-    bin.install("include-what-you-use")
-    bin.install_symlink("include-what-you-use" => "iwyu")
+    iwyu_bindir = (iwyu_subdir_path / "bin")
+    iwyu_libdir = (iwyu_subdir_path / "lib")
+    iwyu_includes = (iwyu_subdir_path / "include")
+
+    iwyu_bindir.mkpath
+    iwyu_libdir.mkpath
+    iwyu_includes.mkpath
+
+    iwyu_clang_lib_path = (iwyu_libdir / "clang")
+    iwyu_clang_lib_path.mkpath
+    iwyu_clang_lib_path.install_symlink(clang_libs => "#{Iwyu::CLANG_VERSION}.0")
+
+    iwyu_includes.install_symlink(cpp_includes => "c++")
+
+    iwyu_bindir.install("fix_includes.py" => "fix_include")
+    iwyu_bindir.install("include-what-you-use")
+    iwyu_bindir.install_symlink("include-what-you-use" => "iwyu")
+
+    bin.install_symlink Dir["#{iwyu_bindir}/*"]
   end
 
   test do
