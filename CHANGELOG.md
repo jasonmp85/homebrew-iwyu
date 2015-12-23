@@ -1,3 +1,11 @@
+### homebrew-iwyu v2.1.0 (December 23, 2015) ###
+
+* Installs include-what-you-use 0.5 (based on clang 3.7.0)
+
+* Drops support for Xcode 6; now requires 7.0 or higher
+
+* Removes default OS X (Xcode 6.1) build from Travis
+
 ### homebrew-iwyu v2.1.0 (October 15, 2015) ###
 
 * Supports Xcode 6.1 or higher, including 7.0
