@@ -1,15 +1,15 @@
 require "English"
 require "formula"
 
-# include-what-you-use needs access to headers included with LLVM 3.5, which
-# is only present in Xcode version 6.1 or higher.
-class Xcode61 < Requirement
+# include-what-you-use needs access to headers included with LLVM 3.7, which
+# is only present in Xcode version 7.0 or higher.
+class Xcode70 < Requirement
   fatal true
 
-  satisfy { MacOS::Xcode.version >= "6.1" }
+  satisfy { MacOS::Xcode.version >= "7.0" }
 
   def message
-    "Xcode 6.1 or newer is required for this package."
+    "Xcode 7.0 or newer is required for this package."
   end
 end
 
@@ -18,16 +18,16 @@ end
 # build and install include-what-you-use, symlink it as iwyu, and install a
 # Python wrapper to automatically correct includes (fix_include).
 class Iwyu < Formula
-  # iwyu 0.4 based on clang 3.6
-  CLANG_VERSION = "3.6"
+  # iwyu 0.5 based on clang 3.7
+  CLANG_VERSION = "3.7"
 
-  version "0.4"
+  version "0.5"
   homepage "http://include-what-you-use.org"
   url "http://include-what-you-use.org/downloads/" \
       "include-what-you-use-#{version}-x86_64-apple-darwin.tar.gz"
-  sha256 "41d7434545cb0c55acd9db0b1b66058ffbe88f3c3b79df4e3f649d54aabbbc7b"
+  sha256 "5d31ca1a7611a6dd40a11387ec34e42bf5aafa1740ed2b3baaf781541df83ad0"
 
-  depends_on Xcode61
+  depends_on Xcode70
 
   def install
     # include-what-you-use needs lib and include directories one level
@@ -59,8 +59,8 @@ class Iwyu < Formula
 
     iwyu_includes.install_symlink(cpp_includes => "c++")
 
-    iwyu_bindir.install("fix_includes.py" => "fix_include")
-    iwyu_bindir.install("include-what-you-use")
+    iwyu_bindir.install("bin/fix_includes.py" => "fix_include")
+    iwyu_bindir.install("bin/include-what-you-use")
     iwyu_bindir.install_symlink("include-what-you-use" => "iwyu")
 
     bin.install_symlink Dir["#{iwyu_bindir}/*"]
