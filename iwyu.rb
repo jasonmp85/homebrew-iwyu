@@ -21,7 +21,7 @@ class Iwyu < Formula
   # iwyu 0.5 based on clang 3.7
   CLANG_VERSION = "3.7"
 
-  version "0.5"
+  version "0.6"
   homepage "http://include-what-you-use.org"
   url "http://include-what-you-use.org/downloads/" \
       "include-what-you-use-#{version}-x86_64-apple-darwin.tar.gz"
