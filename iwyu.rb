@@ -1,7 +1,7 @@
 require "English"
 require "formula"
 
-# include-what-you-use needs access to headers included with LLVM 3.7, which
+# include-what-you-use needs access to headers included with LLVM 3.8, which
 # is only present in Xcode version 7.0 or higher.
 class Xcode70 < Requirement
   fatal true
@@ -18,14 +18,14 @@ end
 # build and install include-what-you-use, symlink it as iwyu, and install a
 # Python wrapper to automatically correct includes (fix_include).
 class Iwyu < Formula
-  # iwyu 0.5 based on clang 3.7
-  CLANG_VERSION = "3.7"
+  # iwyu 0.6 based on clang 3.8
+  CLANG_VERSION = "3.8".freeze
 
-  version "0.5"
+  version "0.6"
   homepage "http://include-what-you-use.org"
   url "http://include-what-you-use.org/downloads/" \
       "include-what-you-use-#{version}-x86_64-apple-darwin.tar.gz"
-  sha256 "5d31ca1a7611a6dd40a11387ec34e42bf5aafa1740ed2b3baaf781541df83ad0"
+  sha256 "46a7e579ad17441ba8b23fe105400565ff978cc61957c19291563912d1f4638d"
 
   depends_on Xcode70
 
