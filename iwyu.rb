@@ -19,7 +19,7 @@ end
 # Python wrapper to automatically correct includes (fix_include).
 class Iwyu < Formula
   # iwyu 0.6 based on clang 3.8
-  CLANG_VERSION = "3.8"
+  CLANG_VERSION = "3.8".freeze
 
   version "0.6"
   homepage "http://include-what-you-use.org"
