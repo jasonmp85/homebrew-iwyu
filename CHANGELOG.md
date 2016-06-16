@@ -1,4 +1,12 @@
-### homebrew-iwyu v2.1.0 (December 23, 2015) ###
+### homebrew-iwyu v4.0.0 (June 16, 2016) ###
+
+* Installs include-what-you-use 0.6 (based on clang 3.8.0)
+
+* Compiles against Apple LLVM 7.3.0
+
+* Adds Xcode 7.3 to Travis build matrix
+
+### homebrew-iwyu v3.0.0 (December 23, 2015) ###
 
 * Installs include-what-you-use 0.5 (based on clang 3.7.0)
 
