@@ -1,7 +1,7 @@
 require "English"
 require "formula"
 
-# include-what-you-use needs access to headers included with LLVM 3.7, which
+# include-what-you-use needs access to headers included with LLVM 3.8, which
 # is only present in Xcode version 7.0 or higher.
 class Xcode70 < Requirement
   fatal true
@@ -18,8 +18,8 @@ end
 # build and install include-what-you-use, symlink it as iwyu, and install a
 # Python wrapper to automatically correct includes (fix_include).
 class Iwyu < Formula
-  # iwyu 0.5 based on clang 3.7
-  CLANG_VERSION = "3.7"
+  # iwyu 0.6 based on clang 3.8
+  CLANG_VERSION = "3.8"
 
   version "0.6"
   homepage "http://include-what-you-use.org"
