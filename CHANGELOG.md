@@ -1,3 +1,17 @@
+### homebrew-iwyu v5.0.0 (January 11, 2017) ###
+
+* Installs include-what-you-use 0.7 (based on clang 3.8.0)
+
+* Removes brittle Xcode-symlink workaround
+
+* Relies on compiler builtin headers included in iwyu
+
+* Relies on iwyu's new macOS header path logic
+
+* Adds Xcode 8.0, 8.1, and 8.2 to build matrix
+
+* Removes pre-7.3 Xcode versions from build matrix
+
 ### homebrew-iwyu v4.0.0 (June 16, 2016) ###
 
 * Installs include-what-you-use 0.6 (based on clang 3.8.0)
