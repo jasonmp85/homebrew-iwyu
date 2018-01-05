@@ -5,7 +5,7 @@ class Iwyu < Formula
   homepage "https://include-what-you-use.org"
   url "https://include-what-you-use.org/downloads/include-what-you-use-0.8-x86_64-apple-darwin.tar.gz"
   version "0.8"
-  sha256 "ba343d452b5d7b999c85387dff1750ca2d01af0c4e5a88a2144b395fa22d1575"
+  sha256 "e9929ad4a5fd15fd6d01549d09c1fa5c6f1c984fb15f2ecddcc2a0457808b2cd"
 
   def install
     # include-what-you-use looks for a lib directory one level up from its bin-
