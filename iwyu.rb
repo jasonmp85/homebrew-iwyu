@@ -3,8 +3,8 @@ require "English"
 class Iwyu < Formula
   desc "analyze includes in C and C++ source files"
   homepage "https://include-what-you-use.org"
-  url "https://include-what-you-use.org/downloads/include-what-you-use-0.7-x86_64-apple-darwin.tar.gz"
-  version "0.7"
+  url "https://include-what-you-use.org/downloads/include-what-you-use-0.8-x86_64-apple-darwin.tar.gz"
+  version "0.8"
   sha256 "ba343d452b5d7b999c85387dff1750ca2d01af0c4e5a88a2144b395fa22d1575"
 
   def install
