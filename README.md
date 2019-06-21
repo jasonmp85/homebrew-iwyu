@@ -1,3 +1,12 @@
+**Unmaintained and Outdated**
+=============================
+
+This tap is no longer necessary. In late May 2019, `iwyu` was accepted into `homebrew-core` and may now be installed with a simple `brew install iwyu`.
+
+If you were a user of this tap, please switch to the `homebrew-core` version, as this one is quite out of date and no longer maintained.
+
+It's as simple as: `brew rm -f jasonmp85/iwyu/iwyu && brew untap jasonmp85/iwyu && brew install iwyu`
+
 Homebrew IWYU
 =============
 
